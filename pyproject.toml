@@ -1,0 +1,14 @@
+[project]
+name = "spacer-website"
+version = "0.1.0"
+description = "Static project website for SPACeR, with a stdlib local preview server."
+readme = "README.md"
+requires-python = ">=3.9"
+# The site is static and the Python here (preview server) uses only the
+# standard library, so there are no runtime dependencies.
+dependencies = []
+
+[tool.uv]
+# This is an application, not an installable library: do not build/install the
+# project itself, just manage the environment for `uv run`.
+package = false
