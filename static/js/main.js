@@ -7,17 +7,7 @@
 
   // ---- navigation ----------------------------------------------------------
   function initNav() {
-    // collapse the floating pill into circular buttons once scrolled
-    var header = document.querySelector(".site-header");
-    if (header) {
-      var onScroll = function () {
-        if (window.scrollY > 120) header.classList.add("scrolled");
-        else header.classList.remove("scrolled");
-      };
-      window.addEventListener("scroll", onScroll, { passive: true });
-      onScroll();
-    }
-
+    // the floating pill header stays fully visible at all scroll positions
     var toggle = document.querySelector(".nav-toggle");
     var nav = document.getElementById("nav");
     if (toggle && nav) {

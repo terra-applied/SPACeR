@@ -228,8 +228,8 @@ mark.hl {
 
 /* ----- Header / nav ------------------------------------------------------ */
 /* Floating frosted-glass "pill" header (Applied Intuition style): fixed and
-   inset from the edges, fully rounded; on scroll it splits into two standalone
-   circular buttons (brand left, Top-CTA right). */
+   inset from the edges, fully rounded; stays fully visible at all scroll
+   positions. On mobile it collapses to a brand circle + hamburger overlay. */
 .site-header {
   position: fixed; inset: 0 0 auto 0; z-index: 50;
   padding: var(--header-gap) 16px;
@@ -251,12 +251,9 @@ mark.hl {
   backdrop-filter: saturate(160%) blur(14px);
   border: 1px solid rgba(17,17,17,.07);
   box-shadow: var(--shadow);
-  opacity: 1;
-  transition: opacity .4s cubic-bezier(.22,.61,.36,1);
 }
-.site-header.scrolled .header-pill::before { opacity: 0; }
 
-.brand-mark, .nav, .nav-cta, .nav-toggle { position: relative; z-index: 1; }
+.brand-mark, .nav, .nav-toggle { position: relative; z-index: 1; }
 
 .brand-mark {
   font-family: var(--font-display);
@@ -302,39 +299,6 @@ mark.hl {
 .nav a:hover { color: var(--ink); text-decoration: none; }
 .nav a.active { color: var(--ink); font-weight: 600; }
 .nav-toggle { display: none; }
-
-/* "Back to top" — its own floating frosted pill on the right. */
-.nav-cta {
-  position: absolute; right: 22px; top: 0; height: 100%;
-  flex: 0 0 auto;
-  display: inline-flex; align-items: center; gap: 0.45em;
-  font-family: var(--font-sans); font-size: var(--fs-meta); font-weight: 600;
-  color: var(--ink);
-  padding: 0 1.05em;
-  border-radius: 999px;
-  background: rgba(255,255,255,.82);
-  -webkit-backdrop-filter: saturate(160%) blur(14px);
-  backdrop-filter: saturate(160%) blur(14px);
-  border: 1px solid rgba(17,17,17,.07);
-  box-shadow: var(--shadow);
-  opacity: 0; transform: translateY(-6px) scale(.96); pointer-events: none;
-  transition: opacity .35s ease, transform .35s cubic-bezier(.22,.61,.36,1),
-              background-color .2s ease;
-}
-.nav-cta:hover { background: #fff; text-decoration: none; }
-.nav-cta .cta-arrow { font-size: 1.05em; line-height: 1; }
-.nav-cta .cta-label { white-space: nowrap; }
-
-/* --- scrolled: bar dissolves; brand collapses to a circle; Top fades in --- */
-.site-header.scrolled .nav { opacity: 0; pointer-events: none; }
-.site-header.scrolled .brand-mark {
-  width: var(--header-h); justify-content: center; gap: 0;
-  background: rgba(255,255,255,.82);
-  border-color: rgba(17,17,17,.07);
-  box-shadow: var(--shadow);
-}
-.site-header.scrolled .brand-word { max-width: 0; opacity: 0; margin: 0; }
-.site-header.scrolled .nav-cta { opacity: 1; transform: none; pointer-events: auto; }
 
 /* ----- Hero -------------------------------------------------------------- */
 .hero { padding-top: calc(var(--header-h) + var(--header-gap) + var(--space-4)); padding-bottom: var(--space-4); }
@@ -577,16 +541,13 @@ table.data .group-row th {
      circles (brand left, menu right) with a full-screen overlay menu. */
   .header-pill::before { opacity: 0 !important; }
   .header-pill { padding-inline: 6px; gap: 0; }
-  .nav-cta { display: none; }
 
-  .brand-mark,
-  .site-header.scrolled .brand-mark {
+  .brand-mark {
     width: var(--header-h); justify-content: center; gap: 0; z-index: 2;
     background: rgba(255,255,255,.82); border-color: rgba(17,17,17,.07);
     box-shadow: var(--shadow);
   }
-  .brand-word,
-  .site-header.scrolled .brand-word { max-width: 0; opacity: 0; margin: 0; }
+  .brand-word { max-width: 0; opacity: 0; margin: 0; }
 
   .nav-toggle {
     display: inline-flex; margin-left: auto; z-index: 2;
@@ -615,8 +576,7 @@ table.data .group-row th {
     opacity: 0; visibility: hidden; pointer-events: none;
     transition: opacity .28s ease, visibility 0s linear .28s;
   }
-  .site-header.scrolled .nav { opacity: 0; pointer-events: none; }
-  .nav.open, .site-header.scrolled .nav.open {
+  .nav.open {
     opacity: 1; visibility: visible; pointer-events: auto;
     transition: opacity .28s ease;
   }
