@@ -387,7 +387,7 @@ mark.hl {
   display: flex; justify-content: center; align-items: center;
   background: linear-gradient(var(--gray-soft), var(--gray-soft));
 }
-.figure-stage svg, .figure-stage img { display: block; max-width: 100%; }
+.figure-stage svg, .figure-stage img, .figure-stage video { display: block; max-width: 100%; }
 figcaption {
   font-family: var(--font-sans);
   font-size: var(--fs-meta);
