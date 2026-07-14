@@ -847,11 +847,38 @@
         const btn = document.getElementById('bibtex-btn');
         const src = document.getElementById('bibtex-src');
         if (!btn || !src) return;
+
+        const flash = (msg) => {
+          btn.textContent = msg;
+          setTimeout(() => { btn.textContent = 'BibTeX'; }, 1500);
+        };
+
+        // Legacy fallback for non-secure contexts (e.g. file://) where the
+        // async Clipboard API is unavailable or rejects.
+        const legacyCopy = (text) => {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed';
+          ta.style.top = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          let ok = false;
+          try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+          document.body.removeChild(ta);
+          return ok;
+        };
+
         btn.addEventListener('click', () => {
-          navigator.clipboard.writeText(src.textContent).then(() => {
-            btn.textContent = 'BibTeX copied';
-            setTimeout(() => { btn.textContent = 'BibTeX'; }, 1500);
-          });
+          const text = src.textContent;
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(
+              () => flash('BibTeX copied'),
+              () => flash(legacyCopy(text) ? 'BibTeX copied' : 'Copy failed')
+            );
+          } else {
+            flash(legacyCopy(text) ? 'BibTeX copied' : 'Copy failed');
+          }
         });
       });
     </script>
@@ -876,6 +903,10 @@
       <p class="copyright">© 2026 Applied Intuition. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- Cloudflare Web Analytics -->
+  <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8f02b8061c284d6988665baa97f009ea"}'></script>
+  <!-- End Cloudflare Web Analytics -->
 
 </body>
 
