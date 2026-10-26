@@ -35,6 +35,7 @@
 
   <script>document.documentElement.className += " js";</script>
   <link rel="stylesheet" href="./static/css/style.css">
+<script src="/assets/series/terra-series.js" defer></script>
   <script defer src="./static/js/main.js"></script>
 </head>
 
@@ -55,6 +56,7 @@
         <a href="#method">Method</a>
         <a href="#results">Results</a>
         <a href="#comparisons">Comparisons</a>
+        <a href="#terra-series">Terra Series</a>
         <a href="https://www.appliedintuition.com/research" target="_blank" rel="noopener">Research ↗</a>
       </nav>
     </div>
@@ -97,7 +99,6 @@
               <a class="btn btn-primary" href="https://arxiv.org/abs/2510.18060" target="_blank" rel="noopener">arXiv</a>
               <a class="btn" href="https://openreview.net/forum?id=Q5H3NCy18S" target="_blank" rel="noopener">Paper</a>
               <a class="btn" href="https://www.appliedintuition.com/blog/spacer" target="_blank" rel="noopener">Blog</a>
-              <button class="btn" type="button" id="bibtex-btn">BibTeX</button>
             </div>
           </div>
         </div>
@@ -787,6 +788,16 @@
       </div>
     </section>
 
+    <!-- ===================== Terra Series ===================== -->
+    <section id="terra-series">
+      <div class="wide reveal">
+        <p class="eyebrow">Terra Series</p>
+        <h2>Part of the Terra Series</h2>
+        <div data-terra-series="spacer"></div>
+        <noscript><p><a href="https://terra-applied.github.io/">Browse the Terra Series</a></p></noscript>
+      </div>
+    </section>
+
     <!-- playback-speed segmented control: slides a blue thumb behind the active
          option and sets the rate on every video -->
     <script>
@@ -834,75 +845,10 @@
       });
     </script>
 
-    <!-- BibTeX citation source (hidden); the hero "BibTeX" button copies this -->
-    <pre id="bibtex-src" hidden>@inproceedings{chang2026spacer,
-  title     = {SPACeR: Self-Play Anchoring with Centralized Reference Models},
-  author    = {Chang, Wei-Jer and Rangesh, Akshay and Joseph, Kevin and Strong, Matthew and Tomizuka, Masayoshi and Hu, Yihan and Zhan, Wei},
-  booktitle = {International Conference on Learning Representations (ICLR)},
-  year      = {2026},
-  note      = {Poster}
-}</pre>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const btn = document.getElementById('bibtex-btn');
-        const src = document.getElementById('bibtex-src');
-        if (!btn || !src) return;
-
-        const flash = (msg) => {
-          btn.textContent = msg;
-          setTimeout(() => { btn.textContent = 'BibTeX'; }, 1500);
-        };
-
-        // Legacy fallback for non-secure contexts (e.g. file://) where the
-        // async Clipboard API is unavailable or rejects.
-        const legacyCopy = (text) => {
-          const ta = document.createElement('textarea');
-          ta.value = text;
-          ta.setAttribute('readonly', '');
-          ta.style.position = 'fixed';
-          ta.style.top = '-9999px';
-          document.body.appendChild(ta);
-          ta.select();
-          let ok = false;
-          try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
-          document.body.removeChild(ta);
-          return ok;
-        };
-
-        btn.addEventListener('click', () => {
-          const text = src.textContent;
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(text).then(
-              () => flash('BibTeX copied'),
-              () => flash(legacyCopy(text) ? 'BibTeX copied' : 'Copy failed')
-            );
-          } else {
-            flash(legacyCopy(text) ? 'BibTeX copied' : 'Copy failed');
-          }
-        });
-      });
-    </script>
-
   </main>
 
   <!-- ===================== Footer ===================== -->
-  <footer class="site-footer">
-    <div class="wide">
-      <div class="foot-grid">
-        <div>
-          <div class="brand-mark" style="color:#fff"><span class="brand-word">SPACeR</span></div>
-          <p style="max-width:38ch;color:#cfd3da">Self-Play Anchoring with Centralized Reference Models.</p>
-        </div>
-        <div>
-          <p style="margin:0 0 .4rem;font-weight:600">Contact</p>
-          <p style="margin:.2rem 0">For any questions, please contact
-            <a href="mailto:research@applied.co">research@applied.co</a>
-          </p>
-        </div>
-      </div>
-      <p class="copyright">© 2026 Applied Intuition. All rights reserved.</p>
-    </div>
-  </footer>
+  <footer class="site-footer" data-terra-series-footer></footer>
 
   <!-- Cloudflare Web Analytics -->
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8f02b8061c284d6988665baa97f009ea"}'></script>

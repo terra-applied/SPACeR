@@ -547,6 +547,8 @@ table.data .group-row th {
     background: rgba(255,255,255,.82); border-color: rgba(17,17,17,.07);
     box-shadow: var(--shadow);
   }
+  /* The mobile brand circle is for the header only; keep the footer brand as plain text. */
+  .site-footer .brand-mark { width: auto; height: auto; justify-content: flex-start; gap: .55em; background: transparent; border-color: transparent; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
   .brand-word { max-width: 0; opacity: 0; margin: 0; }
 
   .nav-toggle {
